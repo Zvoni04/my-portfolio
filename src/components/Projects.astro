@@ -1,0 +1,74 @@
+---
+const projects = [
+  { 
+    title: "Portfolio Website", 
+    date: "Sept 2026", 
+    desc: "Eine moderne, performante Portfolio-Website mit Dark Mode, Glassmorphism-Design und flüssigen CSS-Animationen.", 
+    tags: ["Astro", "HTML/CSS", "JavaScript"] 
+  },
+  { 
+    title: "Degree Thesis (Onlineshop)", 
+    date: "Sept 2024 - Apr 2025", 
+    desc: "Entwicklung eines funktionalen Onlineshops basierend auf der WooCommerce-Plattform.", 
+    tags: ["Wordpress", "WooCommerce"] 
+  },
+  { 
+    title: "ChatApp", 
+    date: "Mai 2024 - Jun 2024", 
+    desc: "Eine einfache, eigens entwickelte Chat-Anwendung mit einer stabilen Server- und Client-Architektur.", 
+    tags: ["C#", "Java"] 
+  },
+  { 
+    title: "M-Bot", 
+    date: "Jan 2024 - Jun 2024", 
+    desc: "Implementierung eines präzisen Steuerungssystems für einen M-Bot.", 
+    tags: ["Python", "HTML", "JavaScript"] 
+  }
+];
+---
+<section>
+  <h2 class="section-title"><span class="hash">#</span> Projekte</h2>
+  <div class="grid">
+    {projects.map(p => (
+      <div class="card">
+        <span class="date">{p.date}</span>
+        <h3>{p.title}</h3>
+        <p>{p.desc}</p>
+        <div class="tags">
+          {p.tags.map(t => (<span class="tag">{t}</span>))}
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  .section-title { font-size: 2rem; margin-bottom: 30px; }
+  .hash { color: var(--accent); }
+
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
+
+  /* Glassmorphism Styling */
+  .card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 16px;
+    padding: 30px;
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    display: flex; flex-direction: column;
+  }
+  .card:hover {
+    transform: translateY(-8px);
+    border-color: var(--accent);
+    box-shadow: 0 15px 30px var(--accent-glow);
+  }
+
+  .date { font-family: monospace; font-size: 0.85rem; color: var(--accent); margin-bottom: 10px; display: block; }
+  h3 { margin: 0 0 15px 0; font-size: 1.4rem; color: var(--text-main); }
+  p { color: var(--text-muted); line-height: 1.6; flex-grow: 1; margin-bottom: 20px; }
+
+  .tags { display: flex; gap: 8px; flex-wrap: wrap; }
+  .tag { background: var(--bg-color); border: 1px solid var(--card-border); padding: 4px 12px; border-radius: 8px; font-size: 0.8rem; font-weight: bold; }
+</style>

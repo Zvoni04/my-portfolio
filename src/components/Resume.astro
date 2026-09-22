@@ -1,0 +1,158 @@
+---
+const skills = [
+  { name: "C/C++/C#", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/csharp/csharp-original.svg", invert: false },
+  { name: "Python", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg", invert: false },
+  { name: "Java", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg", invert: false },
+  { name: "JavaScript", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg", invert: false },
+  { name: "HTML/CSS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg", invert: false },
+  
+  /* Neue Technologien */
+  { name: "Flutter", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/flutter/flutter-original.svg", invert: false },
+  { name: "Dart", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/dart/dart-original.svg", invert: false },
+  { name: "Figma", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/figma/figma-original.svg", invert: false },
+  { name: "Docker", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg", invert: false },
+  { name: "RabbitMQ", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/rabbitmq/rabbitmq-original.svg", invert: false },
+  { name: "Supabase", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/supabase/supabase-original.svg", invert: false },
+  { name: "MongoDB", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mongodb/mongodb-original.svg", invert: false },
+  { name: "SQL", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mysql/mysql-original.svg", invert: false },
+  { name: "NoSQL", icon: "https://cdn.simpleicons.org/couchbase/EA2328", invert: false },
+  { name: "Azure", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/azure/azure-original.svg", invert: false },
+  { name: "AWS", icon: "https://cdn.simpleicons.org/amazonaws/232F3E", invert: true }, /* Wird im Dark Mode weiß */
+  
+  /* Bestehende Tools */
+  { name: "Unity", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/unity/unity-original.svg", invert: true },
+  { name: "SAP", icon: "https://cdn.simpleicons.org/sap/0fa8ba", invert: false },
+  { name: "MS Office", icon: "https://cdn.simpleicons.org/microsoftoffice/d83b01", invert: false }
+];
+
+const certificates = [
+  { name: "PCAP - Programming Essentials in Python", issuer: "Cisco Networking Academy", date: "Jun 2024" },
+  { name: "SAP Certification", issuer: "SAP", date: "Jun 2024" },
+  { name: "Introduction to Cybersecurity", issuer: "Cisco Networking Academy", date: "Jan 2022" },
+  { name: "ECDL-Base & First Aid", issuer: "Diverse", date: "Vorhanden" }
+];
+---
+<section class="resume-section">
+  <h2 class="section-title"><span class="hash">#</span> Skills & Zertifikate</h2>
+  
+  <div class="resume-grid">
+    <!-- Skills -->
+    <div>
+      <h3>Technologien</h3>
+      <div class="skills-container">
+        {skills.map((skill) => (
+          <span class="skill-badge">
+            <img 
+              src={skill.icon} 
+              alt={`${skill.name} Logo`} 
+              class={`skill-icon ${skill.invert ? 'theme-invert' : ''}`} 
+            />
+            {skill.name}
+          </span>
+        ))}
+      </div>
+    </div>
+
+    <!-- Certificates -->
+    <div>
+      <h3>Auszeichnungen</h3>
+      <div class="cert-list">
+        {certificates.map((cert) => (
+          <div class="cert-card">
+            <div class="cert-info">
+              <h4>{cert.name}</h4>
+              <p>{cert.issuer}</p>
+            </div>
+            <span class="cert-date">{cert.date}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .resume-section { padding-top: 40px; }
+  .section-title { font-size: 2rem; margin-bottom: 40px; color: var(--text-main); }
+  .hash { color: var(--accent); }
+
+  .resume-grid { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+    gap: 50px; 
+  }
+  
+  h3 { font-size: 1.4rem; margin-bottom: 25px; color: var(--text-main); }
+
+  /* Skills Badges mit Icons */
+  .skills-container { display: flex; flex-wrap: wrap; gap: 12px; }
+  
+  .skill-badge {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Abstand zwischen Icon und Text */
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    color: var(--text-main);
+    padding: 8px 18px;
+    border-radius: 12px;
+    font-weight: 500;
+    font-size: 0.95rem;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition: transform 0.3s ease, border-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+    cursor: default;
+  }
+  
+  .skill-badge:hover {
+    transform: translateY(-4px);
+    border-color: var(--accent);
+    color: var(--accent);
+    box-shadow: 0 4px 12px var(--accent-glow);
+  }
+
+  .skill-icon {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+  }
+
+  /* Invertiert das Unity-Logo im Dark Mode zu weiß */
+  :global(.dark) .theme-invert {
+    filter: invert(1) brightness(2);
+  }
+
+  /* Certificate Cards */
+  .cert-list { display: flex; flex-direction: column; gap: 16px; }
+  .cert-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    padding: 20px;
+    border-radius: 16px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    display: flex; 
+    justify-content: space-between; 
+    align-items: flex-start; 
+    gap: 15px;
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  .cert-card:hover {
+    transform: translateX(8px);
+    border-color: #ec4899; 
+    box-shadow: 0 10px 20px rgba(236, 72, 153, 0.1);
+  }
+  .cert-info h4 { margin: 0 0 6px 0; color: var(--text-main); font-size: 1.05rem; line-height: 1.4; }
+  .cert-info p { margin: 0; color: var(--text-muted); font-size: 0.9rem; }
+  
+  .cert-date {
+    background: var(--accent-glow);
+    color: var(--accent);
+    padding: 6px 10px;
+    border-radius: 8px;
+    font-family: monospace;
+    font-size: 0.8rem;
+    white-space: nowrap;
+    font-weight: bold;
+  }
+</style>

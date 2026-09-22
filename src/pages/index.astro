@@ -1,17 +1,80 @@
 ---
-
+import Hero from '../components/Hero.astro';
+import Projects from '../components/Projects.astro';
+import Resume from '../components/Resume.astro';
+import ThemeToggle from '../components/ThemeToggle.astro';
 ---
-
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Zvonimir Ljubic | Portfolio</title>
+    <script is:inline>
+      const theme = (() => {
+        if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) return localStorage.getItem('theme');
+        if (window.matchMedia('(prefers-color-scheme: dark)').matches) return 'dark';
+        return 'light';
+      })();
+      if (theme === 'light') document.documentElement.classList.remove('dark');
+      else document.documentElement.classList.add('dark');
+      window.localStorage.setItem('theme', theme);
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <header><ThemeToggle /></header>
+      <main>
+        <Hero />
+        <Projects />
+        <!-- Hier ist die neue Resume Sektion -->
+        <Resume />
+      </main>
+      <footer>&copy; 2026 Zvonimir Ljubic. Erstellt mit Astro.</footer>
+    </div>
+  </body>
 </html>
+
+<style is:global>
+  /* Globale Variablen für Light Mode */
+  :root {
+    --bg-color: #f8fafc;
+    --text-main: #0f172a;
+    --text-muted: #64748b;
+    --card-bg: rgba(255, 255, 255, 0.6);
+    --card-border: #e2e8f0;
+    --card-hover: rgba(255, 255, 255, 0.9);
+    --accent: #6366f1;
+    --accent-glow: rgba(99, 102, 241, 0.3);
+  }
+
+  /* Globale Variablen für Dark Mode */
+  :root.dark {
+    --bg-color: #020617;
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --card-bg: rgba(15, 23, 42, 0.4);
+    --card-border: #1e293b;
+    --card-hover: rgba(30, 41, 59, 0.7);
+    --accent: #818cf8;
+    --accent-glow: rgba(129, 140, 248, 0.2);
+  }
+
+  body {
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    font-family: system-ui, -apple-system, sans-serif;
+    transition: background-color 0.4s ease, color 0.4s ease;
+    margin: 0;
+    padding: 0;
+  }
+
+  .container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  header { display: flex; justify-content: flex-end; padding: 30px 0; }
+  main { display: flex; flex-direction: column; gap: 100px; padding-bottom: 80px; }
+  footer { text-align: center; padding: 30px 0; border-top: 1px solid var(--card-border); color: var(--text-muted); font-size: 14px; }
+</style>
